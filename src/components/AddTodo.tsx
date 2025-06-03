@@ -19,11 +19,11 @@ export const AddTodo = ({ addTodo }: AddTodoProps) => {
 
 
     const newTodo = new Todo(
-        nextId.current, // unikt id här
+        nextId.current,
         todo.name,
         todo.done,
         todo.priority,
-        new Date() // skapar nytt datum här
+        new Date()
       );
 
     addTodo(newTodo);
