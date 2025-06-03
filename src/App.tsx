@@ -1,7 +1,10 @@
 import "./App.css";
+import { TodosApp } from "./components/TodosApp";
 
 function App() {
-  return <></>;
+  return <>
+    <TodosApp />
+  </>;
 }
 
 export default App;
