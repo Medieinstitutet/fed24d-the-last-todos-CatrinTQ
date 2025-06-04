@@ -39,7 +39,7 @@ export const TodoPresentation = ({ todo, changeTodoStatus, deleteTodo }: TodosLi
             </div>
 
             <button
-                className="text-red-500 hover:underline rounded-lg border border-white px-5 py-2 text-base font-medium bg-transparent cursor-pointer transition-colors duration-200 hover:scale-125 hover:underline"
+                className="text-red-500 rounded-lg border border-white px-5 py-2 text-base font-medium bg-transparent cursor-pointer transition-colors duration-200 hover:scale-125 hover:underline"
                 onClick={() => deleteTodo(todo.id)}
             >
                 X
