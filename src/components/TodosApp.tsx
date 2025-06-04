@@ -9,10 +9,10 @@ export const TodosApp = () => {
     const stored = localStorage.getItem("todos");
     if (!stored)
       return [
-        new Todo(99, "Koka kaffe", false, "high", new Date("2025-06-02")),
-        new Todo(98, "Äta frukost", false, "middle", new Date("2025-06-02")),
-        new Todo(97, "Koda", false, "low", new Date("2025-06-03")),
-        new Todo(96, "Gå ut med Frost", false, "high", new Date("2025-06-03")),
+        new Todo(999, "Koka kaffe", false, "high", new Date("2025-06-02")),
+        new Todo(998, "Äta frukost", false, "middle", new Date("2025-06-02")),
+        new Todo(997, "Koda", false, "low", new Date("2025-06-03")),
+        new Todo(996, "Gå ut med Frost", false, "high", new Date("2025-06-03")),
       ];
 
     try {
@@ -29,10 +29,25 @@ export const TodosApp = () => {
     }
   });
 
-  const [sortBy, setsortBy] = useState("");
+  const [nextId, setNextId] = useState(() => {
+    const stored = localStorage.getItem("nextId");
+    return stored ? JSON.parse(stored) : 1;
+  });
+  
+  const handleNextId = () => {
+    const updated = nextId + 1;
+    setNextId(updated);
+    localStorage.setItem("nextId", JSON.stringify(updated));
+  };
+
+  const [sortBy, setsortBy] = useState(() => {
+    const storedPreferance = localStorage.getItem("sortBy");
+    return storedPreferance ? JSON.parse(storedPreferance) : "";
+  });
 
   const getSortBy = (preference: string) => {
     setsortBy(preference);
+    localStorage.setItem("sortBy", JSON.stringify(preference))
   };
 
   const getSortedTodos = (sortBy: string) => {
@@ -91,7 +106,7 @@ export const TodosApp = () => {
   return (
     <>
       <DarkModeToggle />
-      <AddTodo addTodo={addTodo} />
+      <AddTodo addTodo={addTodo} nextId={nextId} handleNextId={handleNextId}/>
       <TodosList
         todos={todos}
         sortBy={sortBy}

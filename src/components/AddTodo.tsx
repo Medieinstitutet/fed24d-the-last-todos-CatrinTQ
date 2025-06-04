@@ -1,15 +1,16 @@
-import { useRef, useState, type ChangeEvent, type FormEvent } from "react";
+import { useState, type ChangeEvent, type FormEvent } from "react";
 import { Todo } from "../models/todo";
 
 type AddTodoProps = {
   addTodo: (t: Todo) => void;
+  nextId: number;
+  handleNextId: () => void;
 };
 
-export const AddTodo = ({ addTodo }: AddTodoProps) => {
+export const AddTodo = ({ addTodo, nextId, handleNextId }: AddTodoProps) => {
   const [todo, setTodo] = useState<Todo>(
     new Todo(0, "", false, "", new Date())
   );
-  const nextId = useRef(1);
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -22,20 +23,18 @@ export const AddTodo = ({ addTodo }: AddTodoProps) => {
 
   const isInputValid = () => {
     if (todo.name === "") {
-        setMessage("Write something")
+      setMessage("Write something");
+    } else {
+      setMessage("");
+      return;
     }
-    else {
-        setMessage("");
-        return;
-    }
-  }
-
+  };
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
 
     const newTodo = new Todo(
-      nextId.current,
+      nextId,
       todo.name,
       todo.done,
       todo.priority,
@@ -43,10 +42,10 @@ export const AddTodo = ({ addTodo }: AddTodoProps) => {
     );
 
     if (todo.name !== "") {
-        addTodo(newTodo);
-        nextId.current += 1;
-        setTodo(new Todo(0, "", false, "", new Date()));
-        isInputValid();
+      addTodo(newTodo);
+      handleNextId();
+      setTodo(new Todo(0, "", false, "", new Date()));
+      isInputValid();
     }
   };
 
@@ -64,11 +63,11 @@ export const AddTodo = ({ addTodo }: AddTodoProps) => {
             onChange={handleChange}
             className="bg-lightgray h-8 px-2 border rounded color-black"
           />
-           {message && (
-    <p className="absolute top-full mt-1 text-red-500 text-sm left-0">
-      {message}
-    </p>
-  )}
+          {message && (
+            <p className="absolute top-full mt-1 text-red-500 text-sm left-0">
+              {message}
+            </p>
+          )}
         </div>
 
         <div className="flex flex-col">
@@ -88,9 +87,10 @@ export const AddTodo = ({ addTodo }: AddTodoProps) => {
           </select>
         </div>
 
-        <button 
-            onClick={isInputValid}
-            className="bg-green-500 text-white h-8 flex items-center justify-center rounded-lg border border-white px-5 py-2 text-base font-medium cursor-pointer transition-colors duration-200 hover:scale-110 hover:underline">
+        <button
+          onClick={isInputValid}
+          className="bg-green-500 text-white h-8 flex items-center justify-center rounded-lg border border-white px-5 py-2 text-base font-medium cursor-pointer transition-colors duration-200 hover:scale-110 hover:underline"
+        >
           Add todo
         </button>
       </form>
