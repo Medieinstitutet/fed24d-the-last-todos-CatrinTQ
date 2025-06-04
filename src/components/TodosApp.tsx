@@ -1,95 +1,105 @@
-import { useState } from "react"
-import { TodosList } from "./TodosList"
+import { useState } from "react";
+import { TodosList } from "./TodosList";
 import { Todo } from "../models/todo";
 import { AddTodo } from "./AddTodo";
+import { DarkModeToggle } from "./DarkModeToggle";
 
 export const TodosApp = () => {
-    const [todos, setTodos] = useState<Todo[]>(() => {
-        const stored = localStorage.getItem("todos");
-        if (!stored) return [
-            new Todo(1, "Koka kaffe", false, "high", new Date("2025-06-02")),
-            new Todo(2, "Äta frukost", false, "middle", new Date("2025-06-02")),
-            new Todo(3, "Koda", false, "low", new Date("2025-06-03")),
-            new Todo(4, "Gå ut med Frost", false, "high", new Date("2025-06-03"))
-        ];
-      
-        try {
-          const parsed = JSON.parse(stored);
-          return Array.isArray(parsed)
-            ? parsed.map((t: Todo) =>
-                new Todo(t.id, t.name, t.done, t.priority, new Date(t.created))
-              )
-            : [];
-        } catch (err) {
-          console.error("Fel vid hämtning av todos från localStorage:", err);
-          return [
-          ]
-        }
-      });
+  const [todos, setTodos] = useState<Todo[]>(() => {
+    const stored = localStorage.getItem("todos");
+    if (!stored)
+      return [
+        new Todo(99, "Koka kaffe", false, "high", new Date("2025-06-02")),
+        new Todo(98, "Äta frukost", false, "middle", new Date("2025-06-02")),
+        new Todo(97, "Koda", false, "low", new Date("2025-06-03")),
+        new Todo(96, "Gå ut med Frost", false, "high", new Date("2025-06-03")),
+      ];
 
-      const [sortBy, setsortBy] = useState("");
+    try {
+      const parsed = JSON.parse(stored);
+      return Array.isArray(parsed)
+        ? parsed.map(
+            (t: Todo) =>
+              new Todo(t.id, t.name, t.done, t.priority, new Date(t.created))
+          )
+        : [];
+    } catch (err) {
+      console.error("Fel vid hämtning av todos från localStorage:", err);
+      return [];
+    }
+  });
 
-      const getSortBy = (preference: string) => {
-        setsortBy(preference)
-      }
+  const [sortBy, setsortBy] = useState("");
 
-      const getSortedTodos = (sortBy: string) => {
-        const sorted = [...todos];
-    
-        if (sortBy === "date") {
-          return sorted.sort(
-            (a, b) => new Date(a.created).getTime() - new Date(b.created).getTime()
-          );
-        }
-    
-        if (sortBy === "priority") {
-          type Priority = "high" | "middle" | "low";
-    
-          const priorityOrder: Record<Priority, number> = {
-            high: 1,
-            middle: 2,
-            low: 3,
-          };
-    
-          return sorted.sort(
-            (a, b) =>
-              priorityOrder[a.priority as Priority] -
-              priorityOrder[b.priority as Priority]
-          );
-        }
-    
-        return sorted;
+  const getSortBy = (preference: string) => {
+    setsortBy(preference);
+  };
+
+  const getSortedTodos = (sortBy: string) => {
+    const sorted = [...todos];
+
+    if (sortBy === "date") {
+      return sorted.sort(
+        (a, b) => new Date(a.created).getTime() - new Date(b.created).getTime()
+      );
+    }
+
+    if (sortBy === "priority") {
+      type Priority = "high" | "middle" | "low" | "";
+
+      const priorityOrder: Record<Priority, number> = {
+        high: 1,
+        middle: 2,
+        low: 3,
+        "": 4,
       };
-      
-    const handleTodoStatus = (id: number): void => {
-        setTodos(
-            todos.map((t) => {
-                if (t.id === id && t.done === false) {
-                    return { ...t, done: true}
-                }
-                if (t.id === id && t.done === true) {
-                    return { ...t, done: false}
-                }
-                return t;
-            })
-        )
-    };
 
-    const deleteTodo = (id:number): void => {
-        setTodos(todos.filter((t) => t.id !== id));
-
+      return sorted.sort(
+        (a, b) =>
+          priorityOrder[a.priority as Priority] -
+          priorityOrder[b.priority as Priority]
+      );
     }
 
-    const addTodo = (t: Todo) => {
-        setTodos([...todos, t]);
+    return sorted;
+  };
 
-    }
+  const handleTodoStatus = (id: number): void => {
+    setTodos(
+      todos.map((t) => {
+        if (t.id === id && t.done === false) {
+          return { ...t, done: true };
+        }
+        if (t.id === id && t.done === true) {
+          return { ...t, done: false };
+        }
+        return t;
+      })
+    );
+  };
 
-    localStorage.setItem("todos", JSON.stringify(todos));
-    console.log(localStorage.getItem("todos"));
+  const deleteTodo = (id: number): void => {
+    setTodos(todos.filter((t) => t.id !== id));
+  };
 
-    return <>
-        <AddTodo addTodo={addTodo} />
-        <TodosList todos={todos} sortBy={sortBy} getSortBy={getSortBy} getSortedTodos={getSortedTodos} changeTodoStatus={handleTodoStatus} deleteTodo={deleteTodo}/>
+  const addTodo = (t: Todo) => {
+    setTodos([...todos, t]);
+  };
+
+  localStorage.setItem("todos", JSON.stringify(todos));
+
+  return (
+    <>
+      <DarkModeToggle />
+      <AddTodo addTodo={addTodo} />
+      <TodosList
+        todos={todos}
+        sortBy={sortBy}
+        getSortBy={getSortBy}
+        getSortedTodos={getSortedTodos}
+        changeTodoStatus={handleTodoStatus}
+        deleteTodo={deleteTodo}
+      />
     </>
-}
+  );
+};
