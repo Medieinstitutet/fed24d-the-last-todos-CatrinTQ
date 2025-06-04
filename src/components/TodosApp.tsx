@@ -26,6 +26,40 @@ export const TodosApp = () => {
           ]
         }
       });
+
+      const [sortBy, setsortBy] = useState("");
+
+      const getSortBy = (preference: string) => {
+        setsortBy(preference)
+      }
+
+      const getSortedTodos = (sortBy: string) => {
+        const sorted = [...todos];
+    
+        if (sortBy === "date") {
+          return sorted.sort(
+            (a, b) => new Date(a.created).getTime() - new Date(b.created).getTime()
+          );
+        }
+    
+        if (sortBy === "priority") {
+          type Priority = "high" | "middle" | "low";
+    
+          const priorityOrder: Record<Priority, number> = {
+            high: 1,
+            middle: 2,
+            low: 3,
+          };
+    
+          return sorted.sort(
+            (a, b) =>
+              priorityOrder[a.priority as Priority] -
+              priorityOrder[b.priority as Priority]
+          );
+        }
+    
+        return sorted;
+      };
       
     const handleTodoStatus = (id: number): void => {
         setTodos(
@@ -56,6 +90,6 @@ export const TodosApp = () => {
 
     return <>
         <AddTodo addTodo={addTodo} />
-        <TodosList todos={todos} changeTodoStatus={handleTodoStatus} deleteTodo={deleteTodo}/>
+        <TodosList todos={todos} sortBy={sortBy} getSortBy={getSortBy} getSortedTodos={getSortedTodos} changeTodoStatus={handleTodoStatus} deleteTodo={deleteTodo}/>
     </>
 }
