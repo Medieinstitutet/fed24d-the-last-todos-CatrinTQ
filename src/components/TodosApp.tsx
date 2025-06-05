@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { TodosList } from "./TodosList";
-import { Todo } from "../models/todo";
+import { Todo } from "../models/Todo";
 import { AddTodo } from "./AddTodo";
 import { DarkModeToggle } from "./DarkModeToggle";
 

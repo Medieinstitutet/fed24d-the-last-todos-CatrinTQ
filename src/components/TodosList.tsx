@@ -1,4 +1,4 @@
-import { Todo } from "../models/todo";
+import { Todo } from "../models/Todo";
 import { TodoPresentation } from "./TodoPresentation";
 
 type TodosListProps = {

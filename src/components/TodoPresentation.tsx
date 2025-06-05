@@ -1,4 +1,4 @@
-import type { Todo } from "../models/todo"
+import type { Todo } from "../models/Todo"
 
 type TodosListProps = {
     todo: Todo;
