@@ -1,38 +1,40 @@
-# Inlämningsuppgift Todo
+# 📝 The Last Todos
 
-I denna inlämningsuppgift kommer ni att skapa er egen todo-lista.
-Sidan skall visa ett antal punkter som skall göras. Dessa skall då komma upp på skärmen i form av en lista. När uppgiften är slutförd skall användaren kunna markera uppgiften som slutförd och uppgiften skall då tas bort från listan.
+Ett React-projekt byggt med Vite, publicerat via GitHub Pages.
 
-## Betyg G
+## 🚀 Demo
 
-- [x] Skapa en hårdkodad lista med punkter att göra (hitta på egna punkter, dessa skall inte bara vara en text)
-- [x] Presentera listan på skärmen, helst med lite kontroll. Detta betyder i en html-struktur t.ex. i en ul/li-lista
-- [x] Implementera klickhändelse för att hantera borttagandet av en todo.
-- [x] Todo markeras som klar på skärmen och markeras som klar i javascript-listan.
-- [x] Ni behöver använda localStorage så att listan inte börjar om från början varje gång sidan används.
-- [x] Ni behöver använda er av en komponent.
-- [x] Ni behöver använda er av state med en lista med objekt.
+👉 [Live-sidan här](https://medieinstitutet.github.io/fed24d-the-last-todos-CatrinTQ/)
 
-## Betyg VG
+---
 
-- Alla punkter under G
-- [x] Kunna visa även klara händelser och klicka tillbaka den så att de blir oklara igen.
-- [x] Skapa ett formulär som tillåter att en användare skapar nya todos efterhand.
-- [x] Kunna sortera ordningen på dina todos.
-- [x] Implementera ett valfritt grafiskt ramverk, t.ex. tailwind eller material ui.
-- [x] Ni behöver ha minst tre komponenter.
-- [x] Ni måste använda Lifting State Up.
+## 📦 Tech stack
 
-## Allmänt
+- [React](https://reactjs.org/)
+- [Vite](https://vitejs.dev/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- GitHub Pages
 
-Projektet ni har är ett vite-projekt. D.v.s. ni måste köra:
+---
 
-```shell
-npm i
-```
+## 📋 Uppgiftskrav
 
-och
+### Betyg G
+- [x] Hårdkodad lista med todos (ej bara text)
+- [x] Lista renderas på skärmen i HTML-struktur (t.ex. `ul/li`)
+- [x] Klickhändelse för att ta bort todo
+- [x] Todo markeras som klar både visuellt och i JS-listan
+- [x] Använder `localStorage` för att spara todos
+- [x] Minst en React-komponent används
+- [x] State används med lista av objekt
 
-```shell
-npm run dev 
-```
+### Betyg VG
+- [x] Visar även klara todos och kan markera dem som oklara igen
+- [x] Formulär för att lägga till nya todos
+- [x] Funktion för att sortera todos
+- [x] Grafiskt ramverk implementerat (t.ex. Tailwind CSS)
+- [x] Minst tre komponenter
+- [x] "Lifting State Up" används
+
+---
