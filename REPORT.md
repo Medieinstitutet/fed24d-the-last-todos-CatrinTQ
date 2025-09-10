@@ -1,64 +1,56 @@
 # 📌 Rättningsrapport – fed24d-the-last-todos-CatrinTQ
 
 ## 🎯 Uppgiftens Krav:
-# Inlämningsuppgift Todo
+# 📝 The Last Todos
 
-I denna inlämningsuppgift kommer ni att skapa er egen todo-lista i en react-applikation.
-Sidan skall visa ett antal punkter som skall göras. Dessa skall då komma upp på skärmen i form av en lista. När uppgiften är slutförd skall användaren kunna markera uppgiften som slutförd och uppgiften skall då tas bort från listan.
+Ett React-projekt byggt med Vite, publicerat via GitHub Pages.
 
-## Betyg G
+## 🚀 Demo
 
-- Skapa en hårdkodad lista med punkter att göra (hitta på egna punkter, dessa skall inte bara vara en text)
-- Presentera listan på skärmen, helst med lite kontroll. Detta betyder i en html-struktur t.ex. i en ul/li-lista
-- Implementera klickhändelse för att hantera borttagandet av en todo.
-- Todo markeras som klar/tas bort från skärmen och markeras som klar i javascript-listan.
+👉 [Live-sidan här](https://medieinstitutet.github.io/fed24d-the-last-todos-CatrinTQ/)
 
-## Betyg VG
+---
 
-- Alla punkter under G
-- Kunna visa även klara händelser och klicka tillbaka den så att de blir oklara igen.
-- Skapa ett formulär som tillåter att en användare skapar nya todos efterhand.
-- Använda lifting state up för att dela upp dina komponenter bättre.
-- Kunna sortera ordningen på dina todos.
-- Implementera ett valfritt grafiskt ramverk till din todolista, t.ex. material ui eller tailwind.
-- Egen css får gärna skrivas och då skall ni ha en bra struktur och använda flex eller grid på ett bra sätt.
+## 📦 Tech stack
 
-## Allmänt
+- [React](https://reactjs.org/)
+- [Vite](https://vitejs.dev/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- GitHub Pages
 
-Projektet ni har är ett vite-projekt. D.v.s. ni måste köra:
+---
 
-```shell
-npm i
-```
+## 📋 Uppgiftskrav
 
-och
+### Betyg G
+- [x] Hårdkodad lista med todos (ej bara text)
+- [x] Lista renderas på skärmen i HTML-struktur (t.ex. `ul/li`)
+- [x] Klickhändelse för att ta bort todo
+- [x] Todo markeras som klar både visuellt och i JS-listan
+- [x] Använder `localStorage` för att spara todos
+- [x] Minst en React-komponent används
+- [x] State används med lista av objekt
 
-```shell
-npm run dev 
-```
+### Betyg VG
+- [x] Visar även klara todos och kan markera dem som oklara igen
+- [x] Formulär för att lägga till nya todos
+- [x] Funktion för att sortera todos
+- [x] Grafiskt ramverk implementerat (t.ex. Tailwind CSS)
+- [x] Minst tre komponenter
+- [x] "Lifting State Up" används
 
-för att köra projektet.
-
-- Det finns många sätt att lösa denna uppgift på. Om ni känner er osäkra på någonting, fråga hellre någon gång för mycket så att ni känner er säkra på vad ni utvecklar.
-- Ni får gärna ändra strukturen i projektet, detta är bara en grund.
-- Börja med att planera ert arbete, börja inte med Visual Studio Code, även om det är lockande.
-- Gör ert bästa att inte stressa. Lättare sagt än gjort, jag vet. Men ingen mår bättre av att stressa.
-- Ha roligt, skratta när det blir fel och fortsätt att vara nyfiken :)
+---
 
 
 ## 🔍 ESLint-varningar:
 
 
 ## 🏆 **Betyg: VG**
-📌 **Motivering:** Koden uppfyller samtliga krav för både G och VG. Den presenterar en lista med todo-punkter, tillåter användaren att markera dem som klara, och dessa kan även markeras som oklara igen. Användaren kan skapa nya todos via ett formulär. Komponenterna är väl separerade med lyftat tillstånd för delning. Projektet använder TailwindCSS för design och lägger till Dark Mode-funktionalitet. Det finns även funktioner för att sortera todos baserat på datum eller prioritet, vilket uppfyller extra kraven för VG. Koden är generellt välstrukturerad och ger en robust användarupplevelse.
+📌 **Motivering:** Koden uppfyller alla krav för både G och VG. Projektet hanterar todos med funktioner för att lägga till, ta bort, markera som klara, samt spara dessa i localStorage. Användare kan även ändra mellan klar och oklart status, sortera todos och växla mellan ljus och mörkt tema. Tailwind CSS används effektivt för styling och komponentstrukturen är god med well defined props och state management.
 
 💡 **Förbättringsförslag:**  
-Koden är överlag välskriven och strukturerad, men det finns ett par mindre förbättringar som kan övervägas för framtida projekt: 
-
-1. **Typdefinitioner i TypeScript**: Du kan förbättra typ säkerheten i viss mån genom att använda TypeScript's inbyggda enum för prioritet för att undvika eventuella stavfel eller inkonsekvenser. 
-
-2. **Lokal lagring**: Just nu sparas todos i localStorage varje gång komponenten renderas om. Du kan optimera detta genom att bara uppdatera localStorage när 'todos' ändras, t.ex., genom en useEffect-hook. 
-
-3. **Öka Återanvändbarheten**: För DarkModeToggle-komponenten, överväg att bryta ut den i en egen modul med temahantering så att den enkelt kan återanvändas i andra projekt/delar av applikationen.
-
-Med dessa förbättringar skulle projektet bli ännu mer effektivt och återanvändbart.
+Koden är välstrukturerad och uppfyller samtliga krav men kan förbättras genom att: 
+1. Optimera `localStorage` hanteringen - Flytta all `localStorage` uppdatering till en `useEffect` beroende på `todos`. Nuvarande implementation skriver till `localStorage` efter varje enskild funktion och kan leda till onödiga operationer. 
+2. Separera CSS-klasser genom att hålla dem mer DRY genom att extrahera återanvända klasser till filen App.css.
+3. Överväg att använda en state management lösning som Redux eller Context API för skalbarhet, om detta är framtida prioritet.
